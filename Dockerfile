@@ -5,15 +5,17 @@ FROM ubuntu:latest
 ENV DEBIAN_FRONTEND noninteractive
 
 # Install necessary packages
+#php 7.4 
 RUN apt-get update && \
     apt-get install -y apache2 \
-                       php \
-                       libapache2-mod-php \
-                       php-mysql \
-                       php-cli \
-                       php-gd \
-                       php-curl \
-                       php-zip \
+                       mysql-server \
+                       php7.4 \
+                       libapache2-mod-php7.4 \
+                       php7.4-mysql \
+                       php7.4-cli \
+                       php7.4-gd \
+                       php7.4-curl \
+                       php7.4-zip \
                        unzip \
                        wget
 
