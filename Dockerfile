@@ -1,5 +1,5 @@
 # Use an official Ubuntu runtime as a parent image
-FROM ubuntu:latest
+FROM ubuntu:20.04
 
 # Set environment variables
 ENV DEBIAN_FRONTEND noninteractive
@@ -8,6 +8,11 @@ ENV DEBIAN_FRONTEND noninteractive
 #php 7.4 
 RUN apt-get update && \
     apt-get install -y apache2 \
+    #software-properties-common
+        && apt-get install -y software-properties-common \
+        && add-apt-repository ppa:ondrej/php \
+        && apt-get update \
+        && apt-get install -y
                        mysql-server \
                        php7.4 \
                        libapache2-mod-php7.4 \
