@@ -12,7 +12,7 @@ RUN apt-get update && \
         && apt-get install -y software-properties-common \
         && add-apt-repository ppa:ondrej/php \
         && apt-get update \
-        && apt-get install -y
+        && apt-get install -y \
                        mysql-server \
                        php7.4 \
                        libapache2-mod-php7.4 \
