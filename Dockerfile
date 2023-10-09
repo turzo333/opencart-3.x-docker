@@ -25,17 +25,15 @@ RUN apt-get update && \
 # change config-dist.php to config and set permissions for config files
 RUN mv config-dist.php config.php && \
     mv admin/config-dist.php admin/config.php && \
-    chmod 777 config.php && \
-    chmod 777 admin/config.php
+    chmod 755 config.php && \
+    chmod 755 admin/config.php
 
 
 # Set permissions for storage and image directories
-RUN chmod 777 storage/ \
-    && chmod 777 image/ \
-    && chmod 777 image/cache/ \
-    && chmod 777 image/catalog/ \
-    && chmod 777 system/ \
-    && chmod 777 system/storage/
+RUN chmod 755 storage/ \
+    && chmod 755 image/ \
+    && chmod 755 image/cache/ \
+    && chmod 755 image/catalog/ \
 
 # Expose port 80 for Apache
 EXPOSE 80
