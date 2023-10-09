@@ -29,12 +29,6 @@ RUN mv config-dist.php config.php && \
     chmod 755 admin/config.php
 
 
-# Set permissions for storage and image directories
-RUN chmod 755 storage/ \
-    && chmod 755 image/ \
-    && chmod 755 image/cache/ \
-    && chmod 755 image/catalog/ \
-
 # Expose port 80 for Apache
 EXPOSE 80
 
