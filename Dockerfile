@@ -4,12 +4,7 @@ FROM php:7.4-apache as php7.4
 # Set environment variables for MySQL
 RUN apt-get update
 # Install required PHP extensions
-RUN docker-php-ext-install mysqli && \
-    docker-php-ext-install opcache && \
-    docker-php-ext-install json && \
-    docker-php-ext-install zip && \
-    docker-php-ext-install gd && \
-    docker-php-ext-install bcmath
+
 
 # Enable Apache modules
 RUN a2enmod rewrite
