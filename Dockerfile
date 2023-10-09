@@ -1,5 +1,5 @@
 # Use an official PHP image as the base image
-FROM php:7.4-apache
+FROM php:7.4-apache as php7.4
 
 # Set environment variables for MySQL
 
@@ -27,10 +27,12 @@ RUN apt-get update && \
     mv opencart-3.0.3.8/upload/* . && \
     rm -rf opencart-3.0.3.8
 
-# Copy and set permissions for config files
-COPY config.php /var/www/html/config.php
-COPY admin/config.php /var/www/html/admin/config.php
-RUN chmod 644 config.php admin/config.php
+# change config-dist.php to config and set permissions for config files
+RUN mv config-dist.php config.php && \
+    mv admin/config-dist.php admin/config.php && \
+    chmod 777 config.php && \
+    chmod 777 admin/config.php
+
 
 # Set permissions for storage and image directories
 RUN chmod 777 storage/ \
