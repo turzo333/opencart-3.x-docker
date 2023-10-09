@@ -7,7 +7,6 @@ FROM php:7.4-apache as php7.4
 RUN docker-php-ext-install mysqli && \
     docker-php-ext-install opcache && \
     docker-php-ext-install json && \
-    docker-php-ext-install libzip-dev && \
     docker-php-ext-install gd && \
     docker-php-ext-install bcmath
 
