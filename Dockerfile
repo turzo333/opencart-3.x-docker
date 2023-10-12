@@ -34,6 +34,24 @@ RUN chmod -R 755 /var/www/html
 
 # Download and extract OpenCart
 
+#https://github.com/opencart/opencart/releases/download/3.0.3.8/opencart-3.0.3.8.zip
+# download opencart and unzip and move to /var/www/html
+RUN curl -sS https://github.com/opencart/opencart/releases/download/3.0.3.8/opencart-3.0.3.8.zip -o opencart.zip
+RUN unzip opencart.zip
+RUN mv upload/* ./
+RUN rm -rf upload
+RUN rm opencart.zip
+
+# fix permission
+RUN chown -R www-data:www-data /var/www/html
+RUN chmod -R 755 /var/www/html
+ #rename config-dist.php to config.php
+RUN mv config-dist.php config.php
+#rename admin/config-dist.php to admin/config.php
+RUN mv admin/config-dist.php admin/config.php
+
+
+
 
 
 # Expose port 80 for Apache
