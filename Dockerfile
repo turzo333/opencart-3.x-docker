@@ -21,7 +21,13 @@ RUN a2enmod rewrite
 
 # Set the working directory to /var/www/html
 WORKDIR /var/www/html
+# add user
+RUN useradd -ms /bin/bash www-data
+RUN usermod -aG www-data www-data
+
 RUN chown -R www-data:www-data /var/www/html
+RUN chmod -R 755 /var/www/html
+
 
 # Download and extract OpenCart
 
