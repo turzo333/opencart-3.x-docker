@@ -38,6 +38,7 @@ RUN chmod -R 755 /var/www/html
 # download opencart and unzip and move to /var/www/html
 #install wget
 RUN apt-get install -y wget
+RUN apt-get install -y zip
 #download opencart with wget
 
 RUN wget https://github.com/opencart/opencart/releases/download/3.0.3.8/opencart-3.0.3.8.zip
