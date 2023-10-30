@@ -1,5 +1,5 @@
 # Use an official PHP image as the base image
-FROM php:7.4-apache as php7.4
+FROM php:7.2-apache as php7.2
 
 # Set environment variables for MySQL
 RUN apt-get update
@@ -41,14 +41,6 @@ RUN apt-get install -y wget
 RUN apt-get install -y zip
 #download opencart with wget
 
-RUN wget https://github.com/opencart/opencart/releases/download/3.0.3.8/opencart-3.0.3.8.zip
-#unzip opencart
-
-
-RUN unzip opencart-3.0.3.8.zip
-RUN mv upload/* ./
-RUN rm -rf upload
-RUN rm opencart-3.0.3.8.zip
 
 # fix permission
 RUN chown -R www-data:www-data /var/www/html
