@@ -16,8 +16,7 @@ RUN docker-php-ext-install mysqli pdo pdo_mysql gd curl zip
 RUN apt-get update && \
     apt-get install -y zlib1g-dev libpng-dev libjpeg-dev
 
-RUN docker-php-ext-configure gd --with-jpeg && \
-    docker-php-ext-install gd
+RUN docker-php-ext-install gd
 
 # Enable Apache modules
 RUN a2enmod rewrite
