@@ -45,9 +45,9 @@ RUN apt-get install -y zip
 RUN chown -R www-data:www-data /var/www/html
 RUN chmod -R 755 /var/www/html
  #rename config-dist.php to config.php
-RUN mv config-dist.php config.php
-#rename admin/config-dist.php to admin/config.php
-RUN mv admin/config-dist.php admin/config.php
+# RUN mv config-dist.php config.php
+# #rename admin/config-dist.php to admin/config.php
+# RUN mv admin/config-dist.php admin/config.php
 
 
 
