@@ -86,4 +86,4 @@ RUN apt-get install -y zip
 EXPOSE 80 21
 
 # Start Apache in the foreground
-CMD ["/etc/init.d/vsftpd start","apache2-foreground"]
+CMD ["apache2-foreground"]
