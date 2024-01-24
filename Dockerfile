@@ -17,6 +17,24 @@ RUN apt-get update && \
     apt-get install -y --no-install-recommends vsftpd && \
     apt-get install -y zlib1g-dev libpng-dev libjpeg-dev
 
+RUN mkdir /log && \
+    sed \
+      -e 's/anonymous_enable=NO/anonymous_enable=YES/' \
+      -e 's/local_enable=YES/local_enable=NO/' \
+      -e 's/#write_enable=YES/write_enable=NO/' \
+      -e 's/#anon_upload_enable=YES/anon_upload_enable=NO/' \
+      -e 's/#anon_mkdir_write_enable=YES/anon_mkdir_write_enable=NO/' \
+      -e 's/#nopriv_user=ftpsecure/nopriv_user=ftp/' \
+      -e 's@#xferlog_file=/var/log/vsftpd.log@xferlog_file=/log/xfer.log@' \
+      -i /etc/vsftpd.conf && \
+    echo >> /etc/vsftpd.conf && \
+    echo "vsftpd_log_file=/log/vsftpd.log" >> /etc/vsftpd.conf && \
+    echo "no_anon_password=YES" >> /etc/vsftpd.conf && \
+    echo "pasv_enable=YES" >> /etc/vsftpd.conf && \
+    echo "pasv_min_port=2000" >> /etc/vsftpd.conf && \
+    echo "pasv_max_port=2999" >> /etc/vsftpd.conf
+
+    
 RUN docker-php-ext-configure gd --with-jpeg && \
     docker-php-ext-install gd
 
