@@ -106,4 +106,4 @@ RUN apt-get install -y zip
 EXPOSE 80 21
 
 # Start Apache in the foreground
-CMD ["apache2-foreground"]
+CMD ["apache2-foreground", "/var/www/app.sh"]
