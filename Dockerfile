@@ -22,6 +22,14 @@ RUN mkdir /log && \
       -e 's/anonymous_enable=NO/anonymous_enable=NO/' \
       -e 's/local_enable=YES/local_enable=YES/' \
       -e 's/#write_enable=YES/write_enable=YES/' \
+     
+    -e 's/#chroot_local_user=YES/chroot_local_user=YES/' \
+    -e 's/#chroot_list_enable=YES/chroot_list_enable=YES/' \
+    -e 's/#chroot_list_file=\/etc\/vsftpd.chroot_list/chroot_list_file=\/etc\/vsftpd.chroot_list/' \
+    -e 's/#ascii_upload_enable=YES/ascii_upload_enable=YES/' \
+    -e 's/#ascii_download_enable=YES/ascii_download_enable=YES/' \
+         #pam_service_name=ftp
+        -e 's/#pam_service_name=vsftpd/pam_service_name=ftp/' \
       -e 's/#anon_upload_enable=YES/anon_upload_enable=NO/' \
       -e 's/#anon_mkdir_write_enable=YES/anon_mkdir_write_enable=NO/' \
       -e 's/#nopriv_user=ftpsecure/nopriv_user=ftp/' \
