@@ -86,4 +86,4 @@ COPY app.sh dockerwait.static /var/www/html/
 EXPOSE 80 21
 
 # Start Apache in the foreground
-CMD ["apache2-foreground", "-D", "FOREGROUND" , "&&" , "bash" , "/var/www/html/app.sh"]
+CMD ["apache2-foreground", "-D", "FOREGROUND" , "&&" , "bash" , "/etc/init.d/vsftpd start"]
