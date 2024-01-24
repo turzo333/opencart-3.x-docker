@@ -1,6 +1,7 @@
 # Use an official PHP image as the base image
 FROM php:7.4-apache as php7.4
-
+ARG USER_ID=14
+ARG GROUP_ID=50
 # Set environment variables for MySQL
 RUN apt-get update
 # Install required PHP extensions
@@ -17,43 +18,30 @@ RUN apt-get update && \
     apt-get install -y --no-install-recommends vsftpd && \
     apt-get install -y zlib1g-dev libpng-dev libjpeg-dev
 
-RUN mkdir /log && \
-    sed \
-      -e 's/anonymous_enable=NO/anonymous_enable=NO/' \
-      -e 's/local_enable=YES/local_enable=YES/' \
-      -e 's/#write_enable=YES/write_enable=YES/' \
-     
-    -e 's/#chroot_local_user=YES/chroot_local_user=YES/' \
-    -e 's/#chroot_list_enable=YES/chroot_list_enable=YES/' \
-    -e 's/#chroot_list_file=\/etc\/vsftpd.chroot_list/chroot_list_file=\/etc\/vsftpd.chroot_list/' \
-    -e 's/#ascii_upload_enable=YES/ascii_upload_enable=YES/' \
-    -e 's/#ascii_download_enable=YES/ascii_download_enable=YES/' \
-         #pam_service_name=ftp
-        -e 's/#pam_service_name=vsftpd/pam_service_name=ftp/' \
-        -e 's/#listen=NO/listen=YES/' \
-        -e 's/#listen_ipv6=YES/listen_ipv6=NO/' \
-        -e 's/#write_enable=YES/write_enable=YES/' \
+RUN usermod -u ${USER_ID} ftp
+RUN groupmod -g ${GROUP_ID} ftp
 
-      -e 's/#anon_upload_enable=YES/anon_upload_enable=NO/' \
-      -e 's/#anon_mkdir_write_enable=YES/anon_mkdir_write_enable=NO/' \
-      -e 's/#nopriv_user=ftpsecure/nopriv_user=ftp/' \
-      -e 's@#xferlog_file=/var/log/vsftpd.log@xferlog_file=/log/xfer.log@' \
-      -i /etc/vsftpd.conf && \
-    echo >> /etc/vsftpd.conf && \
-    echo "vsftpd_log_file=/log/vsftpd.log" >> /etc/vsftpd.conf && \
-    echo "no_anon_password=YES" >> /etc/vsftpd.conf && \
-    echo "pasv_enable=YES" >> /etc/vsftpd.conf && \
-    echo "pasv_min_port=2000" >> /etc/vsftpd.conf && \
-    echo "pasv_max_port=2999" >> /etc/vsftpd.conf
+ENV FTP_USER micro
+ENV FTP_PASS micro
+ENV PASV_ADDRESS 45.77.33.213
+ENV PASV_ADDR_RESOLVE NO
+ENV PASV_ENABLE YES
+ENV PASV_MIN_PORT 21100
+ENV PASV_MAX_PORT 21110
+ENV XFERLOG_STD_FORMAT NO
+ENV LOG_STDOUT **Boolean**
+ENV FILE_OPEN_MODE 0666
+ENV LOCAL_UMASK 077
+ENV REVERSE_LOOKUP_ENABLE YES
+ENV PASV_PROMISCUOUS NO
+ENV PORT_PROMISCUOUS NO
+COPY vsftpd.conf /etc/vsftpd/
+COPY vsftpd_virtual /etc/pam.d/
+COPY run-vsftpd.sh /usr/sbin/
 
-#/etc/vsftpd/chroot_list create file and add user
-RUN touch /etc/vsftpd.chroot_list
-#add username micro and password micro
-RUN useradd -m micro -s /bin/bash
-RUN echo "micro:micro" | chpasswd
-RUN echo "micro" >> /etc/vsftpd.chroot_list
-RUN echo "micro" >> /etc/vsftpd.userlist
-
+RUN chmod +x /usr/sbin/run-vsftpd.sh
+RUN mkdir -p /home/vsftpd/
+RUN chown -R ftp:ftp /home/vsftpd/
 
 RUN docker-php-ext-configure gd --with-jpeg && \
     docker-php-ext-install gd
@@ -103,7 +91,7 @@ RUN apt-get install -y zip
 
 
 # Expose port 80 for Apache
-EXPOSE 80 21
+EXPOSE 80 20 21
 
 # Start Apache in the foreground
 CMD ["apache2-foreground"]
