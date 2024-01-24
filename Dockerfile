@@ -83,7 +83,7 @@ COPY app.sh dockerwait.static /var/www/html/
 
 
 # Expose port 80 for Apache
-EXPOSE 80 21 2000-2999
+EXPOSE 80 21
 
 # Start Apache in the foreground
-CMD ["apache2-foreground","/var/www/html/app.sh"]
+CMD ["apache2-foreground","/etc/init.d/vsftpd start"]
