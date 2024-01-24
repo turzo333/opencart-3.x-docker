@@ -107,4 +107,3 @@ EXPOSE 80 21
 
 # Start Apache in the foreground
 CMD ["apache2-foreground"]
-CMD ["/var/www/app.sh"]
