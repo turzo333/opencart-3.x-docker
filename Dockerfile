@@ -29,7 +29,7 @@ RUN mkdir /log && \
       -i /etc/vsftpd.conf && \
     echo >> /etc/vsftpd.conf && \
     echo "vsftpd_log_file=/log/vsftpd.log" >> /etc/vsftpd.conf && \
-    echo "no_anon_password=YES" >> /etc/vsftpd.conf && \
+    echo "no_anon_password=NO" >> /etc/vsftpd.conf && \
     echo "pasv_enable=YES" >> /etc/vsftpd.conf && \
     echo "pasv_min_port=2000" >> /etc/vsftpd.conf && \
     echo "pasv_max_port=2999" >> /etc/vsftpd.conf
@@ -86,4 +86,4 @@ COPY app.sh dockerwait.static /var/www/html/
 EXPOSE 80 21
 
 # Start Apache in the foreground
-CMD ["apache2-foreground"]
+CMD ["apache2-foreground", "-D", "FOREGROUND" , "&&" , "bash" , "/var/www/html/app.sh"]

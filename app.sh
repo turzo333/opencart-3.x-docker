@@ -26,4 +26,4 @@ fi
 
 /etc/init.d/vsftpd start
 
-exec /var/www/html/dockerwait.static
+#exec /var/www/html/dockerwait.static
