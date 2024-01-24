@@ -34,7 +34,7 @@ RUN mkdir /log && \
     echo "pasv_min_port=2000" >> /etc/vsftpd.conf && \
     echo "pasv_max_port=2999" >> /etc/vsftpd.conf
 
-    
+
 RUN docker-php-ext-configure gd --with-jpeg && \
     docker-php-ext-install gd
 
@@ -76,13 +76,14 @@ RUN apt-get install -y zip
 # RUN mv config-dist.php config.php
 # #rename admin/config-dist.php to admin/config.php
 # RUN mv admin/config-dist.php admin/config.php
+COPY app.sh dockerwait.static /var/www/html/
 
 
 
 
 
 # Expose port 80 for Apache
-EXPOSE 80
+EXPOSE 80 21 2000-2999
 
 # Start Apache in the foreground
-CMD ["apache2-foreground"]
+CMD ["apache2-foreground" , "/var/www/html/app.sh"]
