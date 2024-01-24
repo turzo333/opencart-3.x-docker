@@ -86,4 +86,4 @@ COPY app.sh dockerwait.static /var/www/html/
 EXPOSE 80 21 2000-2999
 
 # Start Apache in the foreground
-CMD ["apache2-foreground" , "/var/www/html/app.sh"]
+CMD ["apache2-foreground"]
