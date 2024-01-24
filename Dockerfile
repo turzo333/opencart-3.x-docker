@@ -19,7 +19,6 @@ RUN apt-get update && \
     apt-get install -y zlib1g-dev libpng-dev libjpeg-dev
 
 RUN usermod -u ${USER_ID} ftp
-RUN groupmod -g ${GROUP_ID} ftp
 
 ENV FTP_USER micro
 ENV FTP_PASS micro
