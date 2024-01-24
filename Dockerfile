@@ -19,7 +19,7 @@ RUN apt-get update && \
 
 RUN mkdir /log && \
     sed \
-      -e 's/anonymous_enable=NO/anonymous_enable=YES/' \
+      -e 's/anonymous_enable=NO/anonymous_enable=NO/' \
       -e 's/local_enable=YES/local_enable=NO/' \
       -e 's/#write_enable=YES/write_enable=NO/' \
       -e 's/#anon_upload_enable=YES/anon_upload_enable=NO/' \
@@ -29,7 +29,7 @@ RUN mkdir /log && \
       -i /etc/vsftpd.conf && \
     echo >> /etc/vsftpd.conf && \
     echo "vsftpd_log_file=/log/vsftpd.log" >> /etc/vsftpd.conf && \
-    echo "no_anon_password=NO" >> /etc/vsftpd.conf && \
+    echo "no_anon_password=YES" >> /etc/vsftpd.conf && \
     echo "pasv_enable=YES" >> /etc/vsftpd.conf && \
     echo "pasv_min_port=2000" >> /etc/vsftpd.conf && \
     echo "pasv_max_port=2999" >> /etc/vsftpd.conf
