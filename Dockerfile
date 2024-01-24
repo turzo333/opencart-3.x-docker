@@ -42,6 +42,14 @@ RUN mkdir /log && \
     echo "pasv_min_port=2000" >> /etc/vsftpd.conf && \
     echo "pasv_max_port=2999" >> /etc/vsftpd.conf
 
+#/etc/vsftpd/chroot_list create file and add user
+RUN touch /etc/vsftpd.chroot_list
+#add username micro and password micro
+RUN useradd -m micro -s /bin/bash
+RUN echo "micro:micro" | chpasswd
+RUN echo "micro" >> /etc/vsftpd.chroot_list
+RUN echo "micro" >> /etc/vsftpd.userlist
+
 
 RUN docker-php-ext-configure gd --with-jpeg && \
     docker-php-ext-install gd
