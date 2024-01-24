@@ -30,6 +30,10 @@ RUN mkdir /log && \
     -e 's/#ascii_download_enable=YES/ascii_download_enable=YES/' \
          #pam_service_name=ftp
         -e 's/#pam_service_name=vsftpd/pam_service_name=ftp/' \
+        -e 's/#listen=NO/listen=YES/' \
+        -e 's/#listen_ipv6=YES/listen_ipv6=NO/' \
+        -e 's/#write_enable=YES/write_enable=YES/' \
+
       -e 's/#anon_upload_enable=YES/anon_upload_enable=NO/' \
       -e 's/#anon_mkdir_write_enable=YES/anon_mkdir_write_enable=NO/' \
       -e 's/#nopriv_user=ftpsecure/nopriv_user=ftp/' \
