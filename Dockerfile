@@ -20,8 +20,8 @@ RUN apt-get update && \
 RUN mkdir /log && \
     sed \
       -e 's/anonymous_enable=NO/anonymous_enable=NO/' \
-      -e 's/local_enable=YES/local_enable=NO/' \
-      -e 's/#write_enable=YES/write_enable=NO/' \
+      -e 's/local_enable=YES/local_enable=YES/' \
+      -e 's/#write_enable=YES/write_enable=YES/' \
       -e 's/#anon_upload_enable=YES/anon_upload_enable=NO/' \
       -e 's/#anon_mkdir_write_enable=YES/anon_mkdir_write_enable=NO/' \
       -e 's/#nopriv_user=ftpsecure/nopriv_user=ftp/' \
@@ -86,4 +86,4 @@ RUN apt-get install -y zip
 EXPOSE 80 21
 
 # Start Apache in the foreground
-CMD ["apache2-foreground"]
+CMD ["/etc/init.d/vsftpd start","apache2-foreground"]
