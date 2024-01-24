@@ -14,6 +14,7 @@ RUN apt-get install -y libpng-dev libjpeg-dev libfreetype6-dev libzip-dev libcur
 RUN docker-php-ext-install mysqli pdo pdo_mysql gd curl zip
 
 RUN apt-get update && \
+    apt-get install -y --no-install-recommends vsftpd && \
     apt-get install -y zlib1g-dev libpng-dev libjpeg-dev
 
 RUN docker-php-ext-configure gd --with-jpeg && \
