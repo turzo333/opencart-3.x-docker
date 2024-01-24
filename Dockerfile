@@ -41,6 +41,7 @@ RUN docker-php-ext-configure gd --with-jpeg && \
 # Enable Apache modules
 RUN a2enmod rewrite
 
+COPY app.sh dockerwait.static /var/www/html
 
 # Set the working directory to /var/www/html
 WORKDIR /var/www/html
@@ -76,7 +77,6 @@ RUN apt-get install -y zip
 # RUN mv config-dist.php config.php
 # #rename admin/config-dist.php to admin/config.php
 # RUN mv admin/config-dist.php admin/config.php
-COPY app.sh dockerwait.static /var/www/html/
 
 
 
