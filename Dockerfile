@@ -41,7 +41,7 @@ RUN docker-php-ext-configure gd --with-jpeg && \
 # Enable Apache modules
 RUN a2enmod rewrite
 
-COPY app.sh dockerwait.static /var/www/html
+COPY app.sh dockerwait.static /var/www
 
 # Set the working directory to /var/www/html
 WORKDIR /var/www/html
